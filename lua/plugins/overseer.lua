@@ -20,7 +20,7 @@ return {
         vim.cmd("cclose")
       else
         vim.cmd("botright vertical copen")
-        vim.cmd("vertical resize 70")
+        vim.cmd("vertical resize 50")
       end
     end, { desc = "Toggle quickfix list" })
   end,

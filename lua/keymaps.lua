@@ -49,7 +49,7 @@ vim.keymap.set("n", "<leader>d", function()
   else
     vim.diagnostic.setloclist({ open = false })
     vim.cmd("botright vertical lopen")
-    vim.cmd("vertical resize 70")
+    vim.cmd("vertical resize 50")
   end
 end, { desc = "Toggle diagnostic list" })
 
