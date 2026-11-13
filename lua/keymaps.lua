@@ -7,6 +7,10 @@ vim.keymap.set("n", "<down>", "<nop>")
 vim.keymap.set("n", "<up>", "<nop>")
 vim.keymap.set("n", "<right>", "<nop>")
 
+-- Keep screen centered when using <C-d> or <C-u>
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
 -- Easier window navigation
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
@@ -20,17 +24,12 @@ vim.keymap.set("n", "<C-w>>", "<cmd>vertical resize +10<CR>", { desc = "Increase
 vim.keymap.set("n", "<C-w><", "<cmd>vertical resize -10<CR>", { desc = "Decrease window width by 10" })
 
 -- Move visual selection up/down while keeping indentation
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
--- Keep screen centered when using <C-d> or <C-u>
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection up" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection down" })
 
 -- Remap `&` to reuse flags
 vim.keymap.set("n", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags" })
 vim.keymap.set("x", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags" })
 
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open [L]azy" })
-
-vim.keymap.set("n", "\\", "<cmd>Oil<CR>", { desc = "Open [O]il in parent directory" })
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "\\", "<cmd>Oil<CR>", { desc = "Open Oil" })
