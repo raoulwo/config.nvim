@@ -17,7 +17,7 @@ return {
 
       { "j-hui/fidget.nvim", opts = {} },
 
-      -- TODO: `cmp` for code completion, `conform` for automatic formatting.
+      "hrsh7th/cmp-nvim-lsp",
 
       "b0o/schemastore.nvim",
     },
