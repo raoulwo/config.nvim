@@ -33,3 +33,4 @@ vim.keymap.set("x", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags
 
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open [L]azy" })
 
+vim.keymap.set("n", "\\", "<cmd>Oil<CR>", { desc = "Open [O]il in parent directory" })
