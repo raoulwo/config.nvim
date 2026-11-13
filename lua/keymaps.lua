@@ -42,6 +42,15 @@ vim.keymap.set("n", "]d", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Jump to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open error message" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
+vim.keymap.set("n", "<leader>d", function()
+  local loc_info = vim.fn.getloclist(0, { winid = 0 })
+  if loc_info.winid ~= 0 then
+    vim.cmd("lclose")
+  else
+    vim.diagnostic.setloclist({ open = false })
+    vim.cmd("botright vertical lopen")
+    vim.cmd("vertical resize 70")
+  end
+end, { desc = "Toggle diagnostic list" })
 
 vim.keymap.set({ "n", "v" }, "<leader>rf", "<cmd>Format<CR>", { desc = "Format file or selection" })
