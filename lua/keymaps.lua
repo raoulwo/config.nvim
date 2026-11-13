@@ -32,4 +32,14 @@ vim.keymap.set("n", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags
 vim.keymap.set("x", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags" })
 
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "\\", "<cmd>Oil<CR>", { desc = "Open Oil" })
+
+vim.keymap.set("n", "[d", function()
+    vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Jump to previous diagnostic message" })
+vim.keymap.set("n", "]d", function()
+    vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Jump to next diagnostic message" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open error message" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
