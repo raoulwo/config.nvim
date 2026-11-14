@@ -15,4 +15,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.cmd.colorscheme("gruvbox-material")
+vim.cmd.colorscheme("tokyonight")
