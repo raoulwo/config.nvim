@@ -105,23 +105,32 @@ return {
         capabilities = capabilities,
       })
 
-      local ensure_installed = {
+      local ensure_installed = {}
+
+      local servers = {
         "lua_ls",
+        "bashls",
+        "clangd",
+        "gopls",
+        "pyright",
+        "rust_analyzer",
+      }
+
+      local debuggers = {
+        "delve",
+      }
+
+      local linters_and_formatters = {
         "stylua",
       }
 
+      vim.list_extend(ensure_installed, servers)
+      vim.list_extend(ensure_installed, debuggers)
+      vim.list_extend(ensure_installed, linters_and_formatters)
+
       require("mason").setup()
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-      -- TODO: This is probably wrong.
-      require("mason-lspconfig").setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            vim.lsp.config[server_name].setup(server)
-          end,
-        },
-      })
+      require("mason-lspconfig").setup({ ensure_installed = servers })
     end,
   },
 }
