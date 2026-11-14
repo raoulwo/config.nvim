@@ -16,6 +16,7 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),
           },
+          fzf = {},
         },
       })
 
@@ -29,7 +30,6 @@ return {
       vim.keymap.set("n", "<leader>sb", builtin.builtin, { desc = "Search builtin" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search diagnostics" })
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
-      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Search grep" })
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search help" })
       vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search keymaps" })
       vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current word" })
@@ -40,8 +40,13 @@ return {
       vim.keymap.set("n", "<leader>sc", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
       end, { desc = "Search neovim config" })
+      vim.keymap.set("n", "<leader>sp", function()
+        builtin.find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
+      end, { desc = "Search neovim packages" })
 
       vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications" })
+
+      require("telescope.multigrep").setup()
     end,
   },
 }

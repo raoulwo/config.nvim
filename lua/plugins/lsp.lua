@@ -26,7 +26,7 @@ return {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(args)
           vim.diagnostic.config({ virtual_lines = false })
-          vim.diagnostic.config({ virtual_text = false })
+          vim.diagnostic.config({ virtual_text = true })
           vim.diagnostic.config({
             signs = {
               text = {

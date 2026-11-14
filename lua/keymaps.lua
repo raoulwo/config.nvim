@@ -44,3 +44,7 @@ end, { desc = "Jump to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open error message" })
 
 vim.keymap.set({ "n", "v" }, "<leader>rf", "<cmd>Format<CR>", { desc = "Format file or selection" })
+
+vim.keymap.set("n", "<leader>X", "<cmd>source %<CR>", { desc = "Run current file" })
+vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Run current line" })
+vim.keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Run selection" })
