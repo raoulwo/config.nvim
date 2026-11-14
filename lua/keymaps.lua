@@ -34,6 +34,12 @@ vim.keymap.set("x", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>M", "<cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "\\", "<cmd>Oil<CR>", { desc = "Open Oil" })
+vim.keymap.set("n", "<leader>\\", function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("J")
+  vim.api.nvim_win_set_height(0, 5)
+end, { desc = "Open Terminal" })
 
 vim.keymap.set("n", "[d", function()
   vim.diagnostic.jump({ count = -1, float = true })

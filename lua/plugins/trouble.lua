@@ -37,6 +37,30 @@ return {
         "<cmd>Trouble telescope toggle<CR>",
         desc = "[Trouble] Toggle telescope",
       },
+      {
+        "[x",
+        function()
+          local trouble = require("trouble")
+          if not trouble.is_open() then
+            return
+          end
+          ---@diagnostic disable-next-line: missing-parameter, missing-fields
+          trouble.prev({ skip_groups = true, jump = true })
+        end,
+        desc = "[Trouble] Jump to previous item",
+      },
+      {
+        "]x",
+        function()
+          local trouble = require("trouble")
+          if not trouble.is_open() then
+            return
+          end
+          ---@diagnostic disable-next-line: missing-parameter, missing-fields
+          trouble.next({ skip_groups = true, jump = true })
+        end,
+        desc = "[Trouble] Jump to next item",
+      },
     },
   },
 }
