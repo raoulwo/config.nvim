@@ -41,7 +41,7 @@ return {
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
       end, { desc = "Search neovim config" })
 
-      vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications " })
+      vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications" })
     end,
   },
 }
