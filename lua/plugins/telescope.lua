@@ -6,8 +6,13 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
+      local open_with_trouble = require("trouble.sources.telescope").open
       require("telescope").setup({
         defaults = {
+          mappings = {
+            i = { ["<C-t>"] = open_with_trouble },
+            n = { ["<C-t>"] = open_with_trouble },
+          },
           layout_config = {
             horizontal = { preview_width = 0.6 },
           },
@@ -36,6 +41,7 @@ return {
       vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search old files" })
       vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Search buffers" })
       vim.keymap.set("n", "<leader>.", builtin.resume, { desc = "Resume last search" })
+      vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications" })
 
       vim.keymap.set("n", "<leader>sc", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
@@ -44,7 +50,13 @@ return {
         builtin.find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
       end, { desc = "Search neovim packages" })
 
-      vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications" })
+      vim.keymap.set("n", "<leader>/", function()
+        local themes = require("telescope.themes")
+        builtin.current_buffer_fuzzy_find(themes.get_dropdown({
+          winblend = 10,
+          previewer = false,
+        }))
+      end, { desc = "Fuzzy search in current buffer" })
 
       require("telescope.multigrep").setup()
     end,
