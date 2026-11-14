@@ -37,9 +37,11 @@ return {
       vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Search buffers" })
       vim.keymap.set("n", "<leader>.", builtin.resume, { desc = "Resume last search" })
 
-      vim.keymap.set("n", "<leader>sn", function()
+      vim.keymap.set("n", "<leader>sc", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
       end, { desc = "Search neovim config" })
+
+      vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications " })
     end,
   },
 }
