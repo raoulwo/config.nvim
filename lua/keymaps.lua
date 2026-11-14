@@ -31,8 +31,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("n", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags" })
 vim.keymap.set("x", "&", "<cmd>&&<CR>", { desc = "Repeat substitution with flags" })
 
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
-vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Mason" })
+vim.keymap.set("n", "<leader>L", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>M", "<cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "\\", "<cmd>Oil<CR>", { desc = "Open Oil" })
 
 vim.keymap.set("n", "[d", function()
@@ -42,15 +42,5 @@ vim.keymap.set("n", "]d", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Jump to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open error message" })
-vim.keymap.set("n", "<leader>d", function()
-  local loc_info = vim.fn.getloclist(0, { winid = 0 })
-  if loc_info.winid ~= 0 then
-    vim.cmd("lclose")
-  else
-    vim.diagnostic.setloclist({ open = false })
-    vim.cmd("botright vertical lopen")
-    vim.cmd("vertical resize 50")
-  end
-end, { desc = "Toggle diagnostic list" })
 
 vim.keymap.set({ "n", "v" }, "<leader>rf", "<cmd>Format<CR>", { desc = "Format file or selection" })

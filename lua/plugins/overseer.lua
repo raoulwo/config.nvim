@@ -1,27 +1,29 @@
 return {
-  "stevearc/overseer.nvim",
-  opts = {
-    strategy = "terminal",
-    task_list = {
-      direction = "right",
-      min_height = 15,
-      max_height = 20,
-      default_detail = 1,
-    },
-  },
-  config = function(_, opts)
-    require("overseer").setup(opts)
+  {
+    "stevearc/overseer.nvim",
+    opts = {},
+    config = function()
+      local overseer = require("overseer")
 
-    vim.keymap.set("n", "<leader>b", "<cmd>OverseerRun<CR>", { desc = "Build or compile" })
-    vim.keymap.set("n", "<leader>to", "<cmd>OverseerToggle<CR>", { desc = "Toggle Overseer" })
-    vim.keymap.set("n", "<leader>q", function()
-      local qf_info = vim.fn.getqflist({ winid = 0 })
-      if qf_info.winid ~= 0 then
-        vim.cmd("cclose")
-      else
-        vim.cmd("botright vertical copen")
-        vim.cmd("vertical resize 50")
-      end
-    end, { desc = "Toggle quickfix list" })
-  end,
+      overseer.setup()
+
+      overseer.add_template_hook({
+        name = "^make",
+      }, function(task_defn, util)
+        util.add_component(task_defn, {
+          "on_output_quickfix",
+          tail = false,
+          open = false,
+          open_on_exit = "never",
+          items_only = true,
+          errorformat = vim.o.errorformat,
+        })
+
+        util.add_component(task_defn, { "open_trouble_on_failure" })
+      end)
+
+      vim.keymap.set("n", "<leader>b", "<cmd>OverseerRun<CR>", { desc = "Run Overseer" })
+      vim.keymap.set("n", "<leader>o", "<cmd>OverseerToggle<CR>", { desc = "Toggle Overseer" })
+    end,
+  },
 }

@@ -87,9 +87,9 @@ return {
 
             vim.api.nvim_create_autocmd("LspDetach", {
               group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-              callback = function(args)
+              callback = function(callback_args)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds({ group = "lsp_highlight", buffer = args.buf })
+                vim.api.nvim_clear_autocmds({ group = "lsp_highlight", buffer = callback_args.buf })
               end,
             })
           end
@@ -112,7 +112,7 @@ return {
 
       require("mason").setup()
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-      -- WARN: This is probably wrong.
+      -- TODO: This is probably wrong.
       require("mason-lspconfig").setup({
         handlers = {
           function(server_name)
