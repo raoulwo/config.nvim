@@ -32,31 +32,35 @@ return {
       -- NOTE: See `:h telescope.builtin`
       local builtin = require("telescope.builtin")
 
-      vim.keymap.set("n", "<leader>sb", builtin.builtin, { desc = "Search builtin" })
-      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search diagnostics" })
-      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
-      vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search help" })
-      vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search keymaps" })
-      vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current word" })
-      vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search old files" })
-      vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Search buffers" })
-      vim.keymap.set("n", "<leader>.", builtin.resume, { desc = "Resume last search" })
-      vim.keymap.set("n", "<leader>sn", "<cmd>Telescope notify<CR>", { desc = "Search notifications" })
+      local map = function(mode, cmd, fn, desc)
+        vim.keymap.set(mode, cmd, fn, { desc = "[Telescope] " .. desc })
+      end
 
-      vim.keymap.set("n", "<leader>sc", function()
+      map("n", "<leader>sb", builtin.builtin, "Search builtin")
+      map("n", "<leader>sd", builtin.diagnostics, "Search diagnostics")
+      map("n", "<leader>sf", builtin.find_files, "Search files")
+      map("n", "<leader>sh", builtin.help_tags, "Search help")
+      map("n", "<leader>sk", builtin.keymaps, "Search keymaps")
+      map("n", "<leader>sw", builtin.grep_string, "Search current word")
+      map("n", "<leader>so", builtin.oldfiles, "Search old files")
+      map("n", "<leader><leader>", builtin.buffers, "Search buffers")
+      map("n", "<leader>.", builtin.resume, "Resume last search")
+      map("n", "<leader>sn", "<cmd>Telescope notify<CR>", "Search notifications")
+
+      map("n", "<leader>sc", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
-      end, { desc = "Search neovim config" })
-      vim.keymap.set("n", "<leader>sp", function()
+      end, "Search neovim config")
+      map("n", "<leader>sp", function()
         builtin.find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
-      end, { desc = "Search neovim packages" })
+      end, "Search neovim packages")
 
-      vim.keymap.set("n", "<leader>/", function()
+      map("n", "<leader>/", function()
         local themes = require("telescope.themes")
         builtin.current_buffer_fuzzy_find(themes.get_dropdown({
           winblend = 10,
           previewer = false,
         }))
-      end, { desc = "Fuzzy search in current buffer" })
+      end, "Fuzzy search in current buffer")
 
       require("telescope.multigrep").setup()
     end,
