@@ -29,7 +29,7 @@ return {
           :find()
       end
 
-      vim.keymap.set("n", "<leader>h", function()
+      vim.keymap.set("n", "<leader>H", function()
         toggle_telescope(harpoon:list())
       end, { desc = "[Harpoon] Toggle Harpoon" })
 
